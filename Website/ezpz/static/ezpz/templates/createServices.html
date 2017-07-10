@@ -1,0 +1,26 @@
+<h1 class="text-center">Create Services</h1>
+<br/>
+
+
+
+<div class="col-md-8 col-md-offset-2">
+	<!-- error message -->
+	<div ng-if="errorMessage" class="alert alert-danger">
+	  <strong>Error:</strong> {{ errorMessage }}
+	</div>
+	<!-- end error message -->
+
+	<!-- create services form -->
+	<form id="create-form" name="create-form">
+		<input type="text" ng-model="servicesCategory" class="form-control" name="category" placeholder="Category" />
+		<input type="text" ng-model="servicesName" class="form-control" name="name" placeholder="Name" />
+		<input type="text" ng-model="servicesPrice" class="form-control" name="price" placeholder="Price" />
+		<input type="number" ng-model="servicesLikes" class="form-control" name="likes" placeholder="Likes" min="0" step="1"/>
+		<input type="number" ng-model="servicesRating" class="form-control" name="rating" placeholder="rating" min="0" step="any"/>
+		
+
+		<br/>
+		<button class="btn btn-primary btn-lg" ng-click="createServices()" value="submit">Submit</button>
+	</form>
+	<!-- end create services form -->
+</div>
