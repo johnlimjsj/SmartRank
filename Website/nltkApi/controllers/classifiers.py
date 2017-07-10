@@ -1,7 +1,8 @@
 from sklearn.naive_bayes import MultinomialNB
-from nltkApi.controllers.tfidf_analysis import *
+from nltkApi.controllers.tfidf_analysis import train_tfidftransformer_from_file
 from sklearn.pipeline import Pipeline
 from difflib import SequenceMatcher
+from sklearn.feature_extraction.text import TfidfVectorizer, TfidfTransformer, CountVectorizer
 
 def train_nb_classifier_learn():
 	X_train_tfidf, twenty_train, count_vect, tfidf_transformer = train_tfidftransformer_from_file("","")

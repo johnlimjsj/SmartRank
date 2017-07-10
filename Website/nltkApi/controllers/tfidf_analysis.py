@@ -1,9 +1,11 @@
 import string
 from sklearn.feature_extraction.text import TfidfVectorizer, TfidfTransformer, CountVectorizer
 from nltkApi.utils import data_loader, nltk_token_operations
-from nltkApi.utils.nltk_token_operations import *
+from nltkApi.utils.nltk_token_operations import tokenize
+import csv
 import logging
 logging.basicConfig()
+
 
 def get_tfid_score_from_paragraph(tfidf, paragraph):
 	response = tfidf.transform([paragraph])
