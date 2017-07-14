@@ -18,3 +18,14 @@ class Services(models.Model):
 	price = models.CharField(max_length=255)
 	likes = models.IntegerField()
 	rating = models.DecimalField(max_digits=2, decimal_places=1)
+
+class Feedback(models.Model):
+	user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
+	feedback = models.CharField(max_length=65536)
+	date = models.TimeField()
+
+
+class Users(models.Model):
+	name = models.CharField(max_length=255)
+	age = models.IntegerField()
+	designation = models.CharField(max_length=255)
