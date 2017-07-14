@@ -9,11 +9,8 @@ from operator import itemgetter
 def store_feedback(request):
 	data = json.loads(request.body)
 	feedback = data['feedback']
-
-	# populating the database with initial priority scores apart from age
 	Feedback.create(feedback=feedback)
 
-	#return the score as json
 	return JsonResponse({'status': "success"})
 
 @require_GET
