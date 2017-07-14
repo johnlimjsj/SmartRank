@@ -6,6 +6,9 @@ DATA_ROOT_PATH = "ezpz/static/ezpz/data/"
 TRAINING_DATA_ROOT = DATA_ROOT_PATH + "training_data/"
 TEST_DATA_ROOT = DATA_ROOT_PATH + "test_data/"
 
+FEEDBACK_DATA_PATH = TRAINING_DATA_ROOT + "UrgencyDataset.csv"
+QUESTIONS_DATA_PATH = TRAINING_DATA_ROOT + "QuestionsDataset.csv"
+
 class ConsumerComplaints:
 
 	def __generate_path_from_train(fileName):
@@ -15,17 +18,28 @@ class ConsumerComplaints:
 	all = __generate_path_from_train("Consumer_Complaints_all.csv")
 
 
-FEEDBACK_DATA_PATH = TRAINING_DATA_ROOT + "UrgencyDataset.csv"
+
 
 class DataSet:
 	target = []
 	data = []
 	target_names = None
 
+	def format_list(self, file_dir, data_column):
+		with open(file_dir) as csvfile:
+			readFile = csv.DictReader(csvfile)
+			for row in readFile:
+				if row[data_column] != "" and row[data_column] is not None:
+					try:
+						formatted_str = row[data_column].lower().translate(None, string.punctuation).strip()
+						self.data.append(formatted_str)
+					except Exception as e:
+						print e
+
+
 	def format(self, file_dir, data_column, category_column):
 		with open(file_dir) as csvfile:
 			readFile = csv.DictReader(csvfile)
-
 			for row in readFile:
 				if row[data_column] != "" and row[data_column] is not None:
 					try:

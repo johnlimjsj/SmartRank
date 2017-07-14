@@ -13,8 +13,9 @@ from rest_framework.decorators import list_route, detail_route
 from rest_framework import filters
 from nltkApi.controllers import sentiment_analysis, tfidf_analysis, classifiers
 from nltkApi.utils import nltk_token_operations
-from nltkApi.utils.data_loader import ConsumerComplaints, DataSet, FEEDBACK_DATA_PATH
+from nltkApi.utils.data_loader import ConsumerComplaints, DataSet, FEEDBACK_DATA_PATH, QUESTIONS_DATA_PATH
 from nltkApi.models import TrainedModel
+from sklearn.feature_extraction.text import TfidfVectorizer, TfidfTransformer, CountVectorizer
 import pickle
 import numpy as np
 
@@ -37,35 +38,31 @@ def train_models(request):
 		print predicted, np.mean(predicted == dataset.target)
 
 
-	def train_urgency_model_svc():
+	def train_urgency_model_nb():
 		dataset = DataSet()
 		dataset.format(FEEDBACK_DATA_PATH, "Message", "Importance");
 		clf = classifiers.train_nb_classifier(dataset)
-
-		TrainedModel.save_pickle(pickle.dumps(clf), "urgency_svm")
-
-		test_data = [' I would like to commend you and your team on a job well done'] #['My company is in the business of commodity trading, and so our work is highly time sensitive.']
-		# test_vectors = vectorizer.transform(test_data)
-		# predicted = clf.predict(test_data)
-
-
-
+		TrainedModel.save_pickle(pickle.dumps(clf), "urgency_nb")
 
 	# train_consumer_feedback_model_nb()
-	train_urgency_model_svc()
+	train_urgency_model_nb()
 	return HttpResponse("<h1>Training my model here...</h1>")
 
 class IndexView(TemplateView):
 	template_name = 'ezpz/main.html'
-	# paragraph = "It was one of the worst movies I've seen, despite good reviews. Unbelievably bad acting!! Poor direction. It was a VERY poor production. The movie was bad. Very bad movie. VERY BAD movie. VERY BAD movie!"
 
-	# classifiers.Question_Sentence_Match()
+	paragraph = "I NEED loads of help. Please help me" # "It was one of the worst movies I've seen, despite good reviews. Unbelievably bad acting!! Poor direction. It was a VERY poor production. The movie was bad. Very bad movie. VERY BAD movie. VERY BAD movie!"
+	paragraph_medium = "I need some help with activating my account. Several days ago, I tried logging in, but was unsuccessful over 3 attempts and then got locked out. Could I have some assistance with reactivating my account? "# "The damage caused by the Incident only marginally increases over time."
+	paragraph_low = "Thanks for your help on this issue a couple of days back! I would like to commend you and your team on a job well done"
+	question = "why don't you just find it in the target"
+	question2 = "Several days ago, I tried logging in, but was unsuccessful over 3 attempts and then got locked out. Could I have some assistance with reactivating my account?"
+	# classifiers.Question_Sentence_Match(question2)
 
-	clf = TrainedModel.get_clf("urgency_svm")
-	# print clf.predict([paragraph])
+	dataset = DataSet()
+	dataset.format(FEEDBACK_DATA_PATH, "Message", "Importance");
 
-	# retrieved_tfidf_model = pickle.loads(pickled_model)
-	# sentiment_analysis.get_tfid_of_paragraph(retrieved_tfidf_model, paragraph)
+	clf = TrainedModel.get_clf("urgency_nb")
+	info = classifiers.get_classification_score_nb(clf, paragraph_medium)
 
 	@method_decorator(ensure_csrf_cookie)
 	def dispatch(self, *args, **kwargs):
