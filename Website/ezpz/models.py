@@ -28,6 +28,10 @@ class Users(models.Model):
 class Feedback(models.Model):
 	user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
 	feedback = models.CharField(max_length=65536)
-	date_created = models.TimeField() # should have the time stamp when it is created
+	date_created = models.DateTimeField() # should have the time stamp when it is created
 	priority = models.FloatField()
 
+class ImageFeedback(models.Model):
+	image = models.ImageField(upload_to='images/%Y/%m/%d')
+	date_created = models.DateTimeField()
+	priority = models.FloatField()
