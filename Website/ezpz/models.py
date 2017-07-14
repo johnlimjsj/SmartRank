@@ -39,6 +39,14 @@ class Feedback(models.Model):
 
 class ImageFeedback(models.Model):
 	image = models.ImageField(upload_to='images/%Y/%m/%d')
-	category = models.CharField(max_length=65536)
+	category = models.CharField(max_length=65536, null=True)
 	date_created = models.DateTimeField()
 	priority = models.FloatField()
+
+	def as_dict(self):
+		return {
+			'image': self.image,
+			'category': self.category,
+			'date_created': self.date_created,
+			'priority': self.priority
+		}

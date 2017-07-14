@@ -21,6 +21,7 @@ from django.views import View
 import pickle
 import numpy as np
 import datetime
+import json
 
 from django.utils import timezone
 
@@ -110,7 +111,8 @@ class ImageManager(View):
 	def get(self, request):
 		# return all images sorted by priority
 		all_images = ImageFeedback.objects.all().order_by('-priority')
-		return JsonResponse({"images":all_images})
+		dictionaries = [ obj.as_dict() for obj in all_images ]
+		return JsonResponse(json.dumps({"images":dictionaries}), safe=False)
 
 	def post(self, request):
 		# add a new image into database

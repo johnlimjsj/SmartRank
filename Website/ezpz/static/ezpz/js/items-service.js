@@ -61,11 +61,39 @@
 			}
 		};
 
+		var getFeedback = function(callback){
+			var url = "get-priority-dict/";
+		};
 
+		var getImageFeedback = function(callback){
+			var url = "image/";
+
+			$http({
+				method: 'GET',
+				url: url
+			})
+			.then(function(response){
+				$log.debug("get Images success");
+				callback({
+					success: true,
+					images: response.data
+				})
+			}, function(response){
+				$log.debug("get Images fail");
+				callback({
+					success: false,
+					images: response.data
+				})
+			})
+		};
+
+		
 		// exposed functions as part of this service
 		return {
 			getGoodsData: getGoodsData,
-			getServicesData: getServicesData
+			getServicesData: getServicesData,
+			getFeedback: getFeedback,
+			getImageFeedback: getImageFeedback,
 		}
 
 	};

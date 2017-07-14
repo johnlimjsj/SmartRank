@@ -24,6 +24,8 @@
 			// Draw the video frame to the canvas.
 			context.drawImage(player, 0, 0, snapshotCanvas.width, 
 				snapshotCanvas.height);
+
+			var dataURL = snapshotCanvas.toDataURL();
 		}
 
 		navigator.mediaDevices.getUserMedia({video: true})

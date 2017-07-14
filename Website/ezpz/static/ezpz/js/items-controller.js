@@ -2,13 +2,15 @@
 	var controller = function($scope, $log, $location, $route, ezpzItemsService){
 		$scope.goodsData = {};
 		$scope.servicesData = {};
+		$scope.feedback = {};
+		$scope.imageFeedback = {};
 		$scope.errorMessage = "";
 		var vm = this;
 
 		// on startup, get the topics and get the number of pages
 		vm.activate = function(){
-
-			
+			// getFeedback();
+			getImageFeedback();
 
 			// getGoodsData();
 			// getServicesData();
@@ -32,6 +34,29 @@
 					$scope.errorMessage = "";
 				} else {
 					$scope.errorMessage += " Unable to retrieve services data from server.";
+				}
+			});
+		}
+
+		function getFeedback(){
+			ezpzItemsService.getFeedback(function(response){
+				if(response.success){
+					$scope.imageFeedback = response;
+					$scope.errorMessage = "";
+				} else {
+					$scope.errorMessage += "Unable to retrieve feedback from server.";
+				}
+			});
+
+		}
+
+		function getImageFeedback(){
+			ezpzItemsService.getImageFeedback(function(response){
+				if(response.success){
+					$scope.imageFeedback = response.images;
+					$scope.errorMessage = "";
+				} else {
+					$scope.errorMessage += "Unable to retrieve image feedback from server.";
 				}
 			});
 		}
