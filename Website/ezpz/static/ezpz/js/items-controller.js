@@ -7,8 +7,11 @@
 
 		// on startup, get the topics and get the number of pages
 		vm.activate = function(){
-			getGoodsData();
-			getServicesData();
+
+			
+
+			// getGoodsData();
+			// getServicesData();
 		};
 
 		function getGoodsData(){

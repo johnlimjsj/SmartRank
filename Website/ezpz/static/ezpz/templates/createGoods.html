@@ -1,4 +1,4 @@
-<h1 class="text-center">Create Goods</h1>
+<h1 class="text-center">Video</h1>
 <br/>
 
 
@@ -11,7 +11,7 @@
 	<!-- end error message -->
 
 	<!-- create goods form -->
-	<form id="create-form" name="create-form">
+<!-- 	<form id="create-form" name="create-form">
 		<input type="text" ng-model="goodsCategory" class="form-control" name="category" placeholder="Category" />
 		<input type="text" ng-model="goodsName" class="form-control" name="name" placeholder="Name" />
 		<input type="number" ng-model="goodsPrice" class="form-control" name="price" placeholder="Price" min="0" step="any"/>
@@ -21,6 +21,21 @@
 
 		<br/>
 		<button class="btn btn-primary btn-lg" ng-click="createGoods()" value="submit">Submit</button>
-	</form>
+	</form> -->
 	<!-- end create goods form -->
+
+	
+	<!-- <img src="">
+	<canvas style="display:none;"></canvas> -->
+</div>
+<div style="display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;">
+<!-- <video autoplay muted="muted"></video> -->
+<video id="player" controls autoplay></video>
+<button id="capture" ng-click="capture()">Capture</button>
+<canvas id="snapshot" width=320 height=240></canvas>
 </div>

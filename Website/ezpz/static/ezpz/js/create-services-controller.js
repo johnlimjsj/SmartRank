@@ -7,8 +7,28 @@
 		$scope.servicesPrice = "";
 		$scope.servicesLikes = "";
 		$scope.servicesRating = "";
+		$scope.currentSpeech = "";
 		var TOPIC_LENGTH_LIMIT = 255;
 		var vm = this;
+		var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
+		recognition.lang = 'en-US';
+		recognition.interimResults = false;
+		recognition.maxAlternatives = 5;
+		recognition.onresult = function(event) {
+			$scope.currentSpeech = event.results[0][0].transcript;
+			$scope.$apply();
+		};
+
+		vm.activate = function(){
+		}
+
+		$scope.startListening = function(){
+			recognition.start();
+		}
+
+		$scope.stopListening = function(){
+			recognition.stop();
+		}
 
 		// create a topic
 		$scope.createServices = function(){
@@ -36,6 +56,8 @@
 				})
 			// } 
 		};
+
+		vm.activate();
 
 
 	};

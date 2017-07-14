@@ -10,6 +10,29 @@
 		var TOPIC_LENGTH_LIMIT = 255;
 		var vm = this;
 
+
+		var player = document.getElementById('player'); 
+		var snapshotCanvas = document.getElementById('snapshot');
+		var captureButton = document.getElementById('capture');
+
+		var handleSuccess = function(stream) {
+			// Attach the video stream to the video element and autoplay.
+			player.srcObject = stream;
+		};
+
+		$scope.capture = function(){
+			var context = snapshot.getContext('2d');
+			// Draw the video frame to the canvas.
+			context.drawImage(player, 0, 0, snapshotCanvas.width, 
+				snapshotCanvas.height);
+		}
+
+		navigator.mediaDevices.getUserMedia({video: true})
+			.then(handleSuccess);
+
+		vm.activate = function(){
+		}
+
 		// create a topic
 		$scope.createGoods = function(){
 
@@ -37,7 +60,7 @@
 			// } 
 		};
 
-
+		vm.activate();
 	};
 
 	var module = angular.module('ezpzMain');
