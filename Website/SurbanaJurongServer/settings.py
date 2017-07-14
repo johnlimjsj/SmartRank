@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'ezpz.apps.EzpzConfig',
     'rest_framework',
     'django_filters',
+    'django.contrib.sites',
+	'nltkApi',
 ]
 
 REST_FRAMEWORK = {

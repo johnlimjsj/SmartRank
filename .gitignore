@@ -6,5 +6,4 @@ db.sqlite3
 .DS_Store
 *.DS_Store
 npm-debug.log
-prod_phone_number_configs.json
-dev_phone_number_configs.json
+
