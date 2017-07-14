@@ -32,8 +32,8 @@ class Feedback(models.Model):
 		cls.objects.create(feedback=feedback, date_created = datetime.datetime.now(), priority=priority)
 
 	@classmethod
-	def get_all_sorted_descending(cls, name):
-		all_feedback = Feedback.objects.all().order_by('priority')
+	def get_all_sorted_descending(cls):
+		all_feedback = Feedback.objects.all().order_by('-priority')
 		return all_feedback
 
 
