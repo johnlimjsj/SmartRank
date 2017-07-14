@@ -116,10 +116,12 @@ class ImageManager(View):
 
 	def post(self, request):
 		# add a new image into database
-		data = json.loads(request.body)
-		imageFeedback = data['imageFeedback']
-		category = general_operations.get_image_classification(imageFeedback)
-		priority = general_operations.get_priority_score(category)
+		# data = json.loads(request.body)
+		# imageFeedback = data['imageFeedback']
+		imageFeedback = request.FILES.get('imageFeedback')
+		# category = general_operations.get_image_classification(imageFeedback)
+		category = "None"
+		priority = general_operations._get_priority_score(category)
 		image = ImageFeedback(image=imageFeedback, category=category, date_created=timezone.now(), priority=priority)
 		image.save()
 		return JsonResponse({"success": True}, status=200)

@@ -26,6 +26,14 @@
 				snapshotCanvas.height);
 
 			var dataURL = snapshotCanvas.toDataURL();
+			ezpzCreateGoodsService.uploadImage(dataURL, function(response){
+				if (response.success){
+					$scope.errorMessage = "";
+					$scope.successMessage = "Image successfully uploaded!";
+				} else {
+					$scope.errorMessage = "Unable to upload image";
+				}
+			})
 		}
 
 		navigator.mediaDevices.getUserMedia({video: true})

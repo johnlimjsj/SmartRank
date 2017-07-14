@@ -34,10 +34,43 @@
 
 		};
 
+		var uploadImage = function(data, callback){
+			var url = "image/";
+			var form = new FormData();
+			form.append("imageFeedback", data);
+
+			// sends the data over to the server to create a new topic
+			$http({
+				method: 'POST',
+				url: url,
+				// headers: ezpzServerService.header,
+			    // transformRequest: ezpzServerService.formURLEncode,
+			    data: form
+			})
+			.then(successCallback, errorCallback);
+
+			// on success
+			function successCallback(response){
+				$log.debug("upload Image success");
+				callback({
+					success:true
+				});
+			}
+
+			// on error
+			function errorCallback(response){
+				$log.debug("upload Image fail");
+				callback({
+					success:false
+				})
+			}
+		}
+
 
 	    // exposes these functions as part of this service
 		return {
-			createGoods: createGoods
+			createGoods: createGoods,
+			uploadImage: uploadImage,
 		};
 
 	};
