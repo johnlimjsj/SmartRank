@@ -11,14 +11,14 @@ from rest_framework import viewsets, generics
 from django.core.paginator import Paginator
 from rest_framework.decorators import list_route, detail_route
 from rest_framework import filters
-from nltkApi.controllers import sentiment_analysis, tfidf_analysis, classifiers
+from nltkApi.controllers import sentiment_analysis, tfidf_analysis, classifiers, general_operations
 from nltkApi.utils import nltk_token_operations
 from nltkApi.utils.data_loader import ConsumerComplaints, DataSet, FEEDBACK_DATA_PATH, QUESTIONS_DATA_PATH
 from nltkApi.models import TrainedModel
 from sklearn.feature_extraction.text import TfidfVectorizer, TfidfTransformer, CountVectorizer
 import pickle
 import numpy as np
-
+import datetime
 
 def train_models(request):
 
@@ -63,6 +63,9 @@ class IndexView(TemplateView):
 
 	clf = TrainedModel.get_clf("urgency_nb")
 	info = classifiers.get_classification_score_nb(clf, paragraph_medium)
+	print info
+	#
+	# general_operations.get_age(datetime.datetime(2017, 6, 23, 16, 29, 43))
 
 	@method_decorator(ensure_csrf_cookie)
 	def dispatch(self, *args, **kwargs):
