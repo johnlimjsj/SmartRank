@@ -19,7 +19,6 @@ class Services(models.Model):
 	likes = models.IntegerField()
 	rating = models.DecimalField(max_digits=2, decimal_places=1)
 
-
 class Users(models.Model):
 	name = models.CharField(max_length=255)
 	age = models.IntegerField()
@@ -33,5 +32,6 @@ class Feedback(models.Model):
 
 class ImageFeedback(models.Model):
 	image = models.ImageField(upload_to='images/%Y/%m/%d')
+	category = models.CharField(max_length=65536)
 	date_created = models.DateTimeField()
 	priority = models.FloatField()

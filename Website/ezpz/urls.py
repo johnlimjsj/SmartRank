@@ -17,6 +17,7 @@ urlpatterns = [
 	url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 	url(r'^train/$', views.train_models, name='train'),
 	url(r'^get-priority/$', general_operations.get_priority_score),
+	url(r'^image$', views.ImageManager.as_view(), name='image'),
     # this is the old index view. Commented it out because of the *
     # url('^.*$', views.IndexView.as_view(), name='index'),
 	url(r'^.*$', views.IndexView.as_view(), name='index'),

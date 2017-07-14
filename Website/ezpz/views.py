@@ -16,6 +16,8 @@ from nltkApi.utils import nltk_token_operations
 from nltkApi.utils.data_loader import ConsumerComplaints, DataSet, FEEDBACK_DATA_PATH, QUESTIONS_DATA_PATH
 from nltkApi.models import TrainedModel
 from sklearn.feature_extraction.text import TfidfVectorizer, TfidfTransformer, CountVectorizer
+from django.utils import timezone
+from django.views import View
 import pickle
 import numpy as np
 import datetime
@@ -99,3 +101,22 @@ class ServicesManager(generics.ListAPIView):
     def get_queryset(self):
         category = self.kwargs['category']
         return Services.objects.filter(category__iexact=category)
+
+
+class ImageManager(View):
+	def get(self, request):
+		# return all images sorted by priority
+		all_images = ImageFeedback.objects.all().order_by('-priority')
+		return JsonResponse({"images":all_images})
+
+	def post(self, request):
+		# add a new image into database
+		data = json.loads(request.body)
+		imageFeedback = data['imageFeedback']
+		category = general_operations.get_image_classification(imageFeedback)
+		priority = general_operations.get_priority_score(category)
+		image = ImageFeedback(image=imageFeedback, category=category, date_created=timezone.now(), priority=priority)
+		image.save()
+		return JsonResponse({"success": True}, status=200)
+
+

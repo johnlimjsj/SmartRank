@@ -10,7 +10,6 @@
 		var TOPIC_LENGTH_LIMIT = 255;
 		var vm = this;
 
-
 		var player = document.getElementById('player'); 
 		var snapshotCanvas = document.getElementById('snapshot');
 		var captureButton = document.getElementById('capture');
