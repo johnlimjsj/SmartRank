@@ -44,9 +44,9 @@ def train_models(request):
 
 class IndexView(TemplateView):
 	template_name = 'ezpz/main.html'
-	paragraph = "It was one of the worst movies I've seen, despite good reviews. Unbelievably bad acting!! Poor direction. It was a VERY poor production. The movie was bad. Very bad movie. VERY BAD movie. VERY BAD movie!"
+	# paragraph = "It was one of the worst movies I've seen, despite good reviews. Unbelievably bad acting!! Poor direction. It was a VERY poor production. The movie was bad. Very bad movie. VERY BAD movie. VERY BAD movie!"
 
-	classifiers.Question_Sentence_Match()
+	# classifiers.Question_Sentence_Match()
 
 	# retrieved_tfidf_model = pickle.loads(pickled_model)
 	# sentiment_analysis.get_tfid_of_paragraph(retrieved_tfidf_model, paragraph)

@@ -17,5 +17,5 @@ urlpatterns = [
 	url(r'^train/$', views.train_models, name='train'),	
     # this is the old index view. Commented it out because of the *
     # url('^.*$', views.IndexView.as_view(), name='index'),
-	url('^.*$', views.IndexView.as_view(), name='index'),
+	url(r'^.*$', views.IndexView.as_view(), name='index'),
 ]

@@ -3,6 +3,33 @@
 
 	var controller = function($scope, $log){
 		var vm = this;
+
+		// var video = document.querySelector('video');
+		// var canvas = document.querySelector('canvas');
+		// var ctx = canvas.getContext('2d');
+		// var localMediaStream = null;
+
+		// function snapshot() {
+		// 	if (localMediaStream) {
+		// 		ctx.drawImage(video, 0, 0);
+		// 		// "image/webp" works in Chrome.
+		// 		// Other browsers will fall back to image/png.
+		// 		document.querySelector('img').src = canvas.toDataURL('image/webp');
+		// 	}
+		// }
+
+		// function errorCallback(){
+		// console.log("Error");
+		// }
+
+		// video.addEventListener('click', snapshot, false);
+
+		// // Not showing vendor prefixes or code that works cross-browser.
+		// navigator.getUserMedia({video: true}, function(stream) {
+		// video.src = window.URL.createObjectURL(stream);
+		// localMediaStream = stream;
+		// }, errorCallback);
+		
 	};
 
 	// application configuration, enables things such as $log.debug and removes the need for django's csrf_token by using angular's
