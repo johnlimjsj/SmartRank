@@ -30,7 +30,11 @@ def _get_priority_score_dict(feedback):
 	score_sentiment = sentiment_analysis.get_sentiment_score(feedback)
 	return {'urgency': score_urgency, 'question': score_qn, 'length': score_len, 'sentiment':score_sentiment}
 
-
+def _get_priority_score(score_dict):
+	weights = {'urgency': 0.1, 'sentiment': 0.1, 'length': 0.2, 'question': 0.1}
+	score = score_dict['urgency'] * weights['urgency'] + score_dict['sentiment'] * weights['sentiment'] + \
+			score_dict['length'] * weights['length'] + score_dict['question'] * weights['question']
+	return score
 
 
 
