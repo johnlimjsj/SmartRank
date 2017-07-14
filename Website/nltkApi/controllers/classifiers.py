@@ -1,12 +1,31 @@
 from sklearn.naive_bayes import MultinomialNB
 from nltkApi.controllers.tfidf_analysis import train_tfidftransformer_from_file
 from sklearn.pipeline import Pipeline
+from sklearn.metrics import *
+from sklearn import svm
+import time
+from sklearn.metrics import classification_report
 from difflib import SequenceMatcher
 from sklearn.feature_extraction.text import TfidfVectorizer, TfidfTransformer, CountVectorizer
+
+def train_svm_classifier(dataset):
+	vectorizer = TfidfVectorizer(min_df=5, max_df = 0.8, sublinear_tf=True, use_idf=True)
+	train_vectors = vectorizer.fit_transform(dataset.data)
+	classifier_rbf = svm.SVC()
+	classifier_rbf.fit(train_vectors, dataset.target)
+
+
+	return classifier_rbf, vectorizer
+
+
+
+
 
 def train_nb_classifier_learn():
 	X_train_tfidf, twenty_train, count_vect, tfidf_transformer = train_tfidftransformer_from_file("","")
 	clf = MultinomialNB().fit(X_train_tfidf, twenty_train.target)
+	clf2 = MultinomialNB();
+
 	docs_new = ['God is love', 'OpenGL on the GPU is fast']
 	X_new_counts = count_vect.transform(docs_new)
 	X_new_tfidf = tfidf_transformer.transform(X_new_counts)

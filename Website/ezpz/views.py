@@ -13,12 +13,11 @@ from rest_framework.decorators import list_route, detail_route
 from rest_framework import filters
 from nltkApi.controllers import sentiment_analysis, tfidf_analysis, classifiers
 from nltkApi.utils import nltk_token_operations
-from nltkApi.utils.data_loader import ConsumerComplaints, DataSet
+from nltkApi.utils.data_loader import ConsumerComplaints, DataSet, FEEDBACK_DATA_PATH
+from nltkApi.models import TrainedModel
 import pickle
 import numpy as np
 
-# Create your views here.
-pickled_model = ""
 
 def train_models(request):
 
@@ -29,24 +28,41 @@ def train_models(request):
 		# tfidf_analysis.get_tfid_score_from_paragraph(tf, "funds account bank")
 
 	def train_consumer_feedback_model_nb():
-		consumer_dataset = DataSet()
-		consumer_dataset.format(ConsumerComplaints.all, "Issue", "Product")
-		text_clf = classifiers.train_nb_classifier(consumer_dataset)
+		dataset = DataSet()
+		dataset.format(ConsumerComplaints.all, "Issue", "Product")
+		text_clf = classifiers.train_nb_classifier(dataset)
 		pickle.dumps(text_clf)
-		docs_new = ['God is love']
-		predicted = text_clf.predict(docs_new)
-		print predicted, np.mean(predicted == consumer_dataset.target)
+		test_data = ['God is love']
+		predicted = text_clf.predict(test_data)
+		print predicted, np.mean(predicted == dataset.target)
+
+
+	def train_urgency_model_svc():
+		dataset = DataSet()
+		dataset.format(FEEDBACK_DATA_PATH, "Message", "Importance");
+		clf = classifiers.train_nb_classifier(dataset)
+
+		TrainedModel.save_pickle(pickle.dumps(clf), "urgency_svm")
+
+		test_data = [' I would like to commend you and your team on a job well done'] #['My company is in the business of commodity trading, and so our work is highly time sensitive.']
+		# test_vectors = vectorizer.transform(test_data)
+		# predicted = clf.predict(test_data)
+
+
 
 
 	# train_consumer_feedback_model_nb()
-
-	return HttpResponse("Training my model here...")
+	train_urgency_model_svc()
+	return HttpResponse("<h1>Training my model here...</h1>")
 
 class IndexView(TemplateView):
 	template_name = 'ezpz/main.html'
 	paragraph = "It was one of the worst movies I've seen, despite good reviews. Unbelievably bad acting!! Poor direction. It was a VERY poor production. The movie was bad. Very bad movie. VERY BAD movie. VERY BAD movie!"
 
 	classifiers.Question_Sentence_Match()
+
+	clf = TrainedModel.get_clf("urgency_svm")
+	# print clf.predict([paragraph])
 
 	# retrieved_tfidf_model = pickle.loads(pickled_model)
 	# sentiment_analysis.get_tfid_of_paragraph(retrieved_tfidf_model, paragraph)

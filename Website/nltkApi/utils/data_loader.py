@@ -15,6 +15,7 @@ class ConsumerComplaints:
 	all = __generate_path_from_train("Consumer_Complaints_all.csv")
 
 
+FEEDBACK_DATA_PATH = TRAINING_DATA_ROOT + "UrgencyDataset.csv"
 
 class DataSet:
 	target = []
@@ -36,26 +37,4 @@ class DataSet:
 
 
 
-def train_nb_classifier(file_dir, data_column, category_column="Product"):
-	print "starting tfid training"
-	with open(file_dir) as csvfile:
-		# tfidf = TfidfVectorizer(tokenizer=tokenize, stop_words='english')
-		readFile = csv.DictReader(csvfile)
-		complaint_list = []
-		dataset_consumers = DataSet()
-
-		for row in readFile:
-			if row[data_column] != "" and row[data_column] is not None:
-				try:
-					formatted_str = row[data_column].lower().translate(None, string.punctuation).strip()
-					complaint_list.append(formatted_str)
-					dataset_consumers.data.append(formatted_str)
-					dataset_consumers.target.append(row[category_column])
-				except Exception as e:
-					print e
-					print "model was not successfully trained"
-					return
-		tfidf.fit(complaint_list)
-		print "model trained"
-		return tfidf
 
