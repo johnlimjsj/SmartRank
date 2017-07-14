@@ -22,6 +22,8 @@ import pickle
 import numpy as np
 import datetime
 
+from django.utils import timezone
+
 def train_models(request):
 
 	def train_consumer_feedback_model_tfidf():
@@ -66,6 +68,7 @@ class IndexView(TemplateView):
 	clf = TrainedModel.get_clf("urgency_nb")
 	info = classifiers.get_classification_score_nb(clf, paragraph_medium)
 	print info
+
 	#
 	# general_operations.get_age(datetime.datetime(2017, 6, 23, 16, 29, 43))
 

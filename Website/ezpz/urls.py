@@ -1,7 +1,7 @@
 from django.conf.urls import include, url
 from rest_framework import routers
 from . import views
-from nltkApi.controllers import general_operations
+from ezpz.controllers import feedback_manager
 
 from rest_framework.urlpatterns import format_suffix_patterns
 
@@ -16,8 +16,9 @@ urlpatterns = [
 	url('^api/', include(router.urls)),
 	url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 	url(r'^train/$', views.train_models, name='train'),
-	url(r'^get-priority/$', general_operations.get_priority_score),
 	url(r'^image$', views.ImageManager.as_view(), name='image'),
+	url(r'^get-priority/$', feedback_manager.get_priority_score),
+	url(r'^get-priority-dict/$', feedback_manager.get_priority_score_dict),
     # this is the old index view. Commented it out because of the *
     # url('^.*$', views.IndexView.as_view(), name='index'),
 	url(r'^.*$', views.IndexView.as_view(), name='index'),

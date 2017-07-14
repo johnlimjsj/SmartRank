@@ -2,6 +2,8 @@
 from __future__ import unicode_literals
 
 from django.db import models
+import datetime
+from django.utils import timezone
 
 # Create your models here.
 
@@ -19,16 +21,21 @@ class Services(models.Model):
 	likes = models.IntegerField()
 	rating = models.DecimalField(max_digits=2, decimal_places=1)
 
-class Users(models.Model):
-	name = models.CharField(max_length=255)
-	age = models.IntegerField()
-	designation = models.CharField(max_length=255)
-
 class Feedback(models.Model):
-	user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
 	feedback = models.CharField(max_length=65536)
 	date_created = models.DateTimeField() # should have the time stamp when it is created
 	priority = models.FloatField()
+
+	@classmethod
+	def create(cls, feedback, priority):
+		cls.objects.create(feedback=feedback, date_created = datetime.datetime.now(), priority=priority)
+
+	@classmethod
+	def get_all_sorted_descending(cls, name):
+		all_feedback = Feedback.objects.all().order_by('priority')
+		return all_feedback
+
+
 
 class ImageFeedback(models.Model):
 	image = models.ImageField(upload_to='images/%Y/%m/%d')
