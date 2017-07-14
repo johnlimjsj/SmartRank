@@ -18,7 +18,13 @@ from keras.preprocessing.image import img_to_array
 from keras.preprocessing.image import load_img
 import numpy as np
 import argparse
-import cv2
+
+
+AGE_WEIGHT = 0.1
+URGENCY_WEIGHT = 0.1
+SENTIMENT_WEIGHT = 0.1
+LENGTH_WEIGHT = 0.1
+QUESTION_WEIGHT = 0.1
 
 def get_length_score(paragraph):
 	tokenizer = RegexpTokenizer(r'\w+')
@@ -27,25 +33,25 @@ def get_length_score(paragraph):
 	score = math.exp(-(1.0 / len(sentences)))
 	return score
 
-def get_age(date_created):
+def get_age_score(date_created):
 	date_now = datetime.datetime.now()
 	time_diff = date_now - date_created
 	hours, remainder = divmod(time_diff.seconds, 3600)
-	score = math.exp(-(1.0/hours))
+	score = math.exp(-(1.0/(hours+0.0001))) # need small offset if not math error
 	return hours, score
 
-def _get_priority_score_dict(feedback):
+def _get_priority_score_dict(feedback, date_created):
 	clf = TrainedModel.get_clf("urgency_nb")
 	score_urgency = classifiers.get_classification_score_nb(clf, "feedback here")
 	score_qn = classifiers.get_question_score(feedback)
 	score_len = get_length_score(feedback)
 	score_sentiment = sentiment_analysis.get_sentiment_score(feedback)
-	return {'urgency': score_urgency, 'question': score_qn, 'length': score_len, 'sentiment':score_sentiment}
+	score_age = get_age_score(date_created)
+	return {'urgency': score_urgency, 'question': score_qn, 'length': score_len, 'sentiment': score_sentiment, 'age': score_age}
 
 def _get_priority_score(score_dict):
-	weights = {'urgency': 0.1, 'sentiment': 0.1, 'length': 0.2, 'question': 0.1}
-	score = score_dict['urgency'] * weights['urgency'] + score_dict['sentiment'] * weights['sentiment'] + \
-			score_dict['length'] * weights['length'] + score_dict['question'] * weights['question']
+	score = score_dict['urgency'] * URGENCY_WEIGHT + score_dict['sentiment'] * SENTIMENT_WEIGHT + \
+			score_dict['length'] * LENGTH_WEIGHT + score_dict['question'] * QUESTION_WEIGHT + score_dict['age'] * AGE_WEIGHT
 	return score
 
 def get_image_classification(imageData):
