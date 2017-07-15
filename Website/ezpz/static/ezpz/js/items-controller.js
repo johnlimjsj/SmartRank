@@ -22,8 +22,10 @@
 		}
 
 		$scope.respondToLowPriority = function(){
-			$scope.lowPriorityFeedback = [];
-			if ($scope.lowPriorityFeedback.length<=0){
+			if ($scope.lowPriorityFeedback.length>0){
+				$scope.lowPriorityFeedback = [];
+			} else {
+				$scope.lowPriorityFeedback = [];
 				for(var key in $scope.feedback){
 					// console.log(feedback);
 					if ($scope.feedback[key].score<lowPriorityThreshold){
