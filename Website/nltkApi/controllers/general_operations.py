@@ -21,16 +21,16 @@ import argparse
 
 
 AGE_WEIGHT = 0.1
-URGENCY_WEIGHT = 0.1
-SENTIMENT_WEIGHT = 0.1
-LENGTH_WEIGHT = 0.1
-QUESTION_WEIGHT = 0.1
+URGENCY_WEIGHT = 0.5
+SENTIMENT_WEIGHT = 0.3
+LENGTH_WEIGHT = 0.05
+QUESTION_WEIGHT = 0.05
 
 def get_length_score(paragraph):
 	tokenizer = RegexpTokenizer(r'\w+')
 	tokens = tokenizer.tokenize(paragraph)
 	sentences = tokenize.sent_tokenize(paragraph)
-	score = math.exp(-(1.0 / len(sentences)))
+	score = math.exp(-(1.0 / (0.45*len(sentences))))
 	return score
 
 def get_age_score(date_created):
