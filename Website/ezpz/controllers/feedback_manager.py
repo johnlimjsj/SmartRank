@@ -18,18 +18,21 @@ def get_sorted_feedback(request):
 
 	def get_manpower(score):
 		manpower_list = [
-			{'name': 'Daniel Seetoh', 'min': 0.6, 'max': 1.0},
+			{'name': 'Lee Hsien Loong', 'min': 0.75, 'max': 0.8},
+			{'name': 'Teo Chee Hean', 'min': 0.7, 'max': 0.75},
+			{'name': 'Goh Chok Tong', 'min': 0.65, 'max': 0.7},
+			{'name': 'Daniel Seetoh', 'min': 0.6, 'max': 0.65},
 			{'name': 'John Lim', 'min': 0.5, 'max': 0.6},
 			{'name': 'Nisha Srinidhi', 'min': 0.4, 'max': 0.5},
 			{'name': 'Nikhil Srinidhi', 'min': 0.3, 'max': 0.4},
 			{'name': 'Joshua Seetoh', 'min': 0.2, 'max': 0.3},
 			{'name': 'Kwan Yew Lee', 'min': 0.15, 'max': 0.2},
 			{'name': 'Benjamin Lee', 'min': 0.1, 'max': 0.15},
-
 		]
+
 		for man in manpower_list:
 			if score >= man['min'] and score < man['max']:
-				return man.name
+				return man['name']
 
 	fb_sorted = Feedback.objects.all()
 	feedback_list = []
