@@ -6,7 +6,8 @@
 		$scope.imageFeedback = {};
 		$scope.errorMessage = "";
 		$scope.showManpower = false;
-		$scope.lowPriorityFeedback = {};
+		$scope.lowPriorityFeedback = [];
+		var lowPriorityThreshold = 0.3;
 		var vm = this;
 
 		// on startup, get the topics and get the number of pages
@@ -21,10 +22,19 @@
 		}
 
 		$scope.respondToLowPriority = function(){
-			// for(var feedback in $scope.feedback){
-			// 	if (feedback.score<)
-			// }
-			console.log($scope.feedback);
+			$scope.lowPriorityFeedback = [];
+			if ($scope.lowPriorityFeedback.length<=0){
+				for(var key in $scope.feedback){
+					// console.log(feedback);
+					if ($scope.feedback[key].score<lowPriorityThreshold){
+						$scope.lowPriorityFeedback.push($scope.feedback[key]);
+					}
+				}
+			}
+		}
+
+		$scope.submitLowPriorityResponse = function(){
+			$scope.lowPriorityFeedback = [];
 		}
 
 		function getGoodsData(){
