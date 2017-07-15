@@ -5,4 +5,5 @@ staticfiles
 .DS_Store
 *.DS_Store
 npm-debug.log
+Consumer_Complaints_all.csv
 
