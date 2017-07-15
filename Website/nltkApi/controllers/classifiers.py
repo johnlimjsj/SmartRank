@@ -35,6 +35,7 @@ def get_classification_score_nb(clf, test_data):
 	info = get_classification_nb(clf, test_data)
 	category = info['category']
 	score = info['score']
+	print "category is", category
 	if (category == 'High'):
 		score = 0.7 + 0.3 * score
 	elif (category == 'Medium'):

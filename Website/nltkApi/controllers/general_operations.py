@@ -42,7 +42,7 @@ def get_age_score(date_created):
 
 def _get_priority_score_dict(feedback, date_created):
 	clf = TrainedModel.get_clf("urgency_nb")
-	score_urgency = classifiers.get_classification_score_nb(clf, "feedback here")
+	score_urgency = classifiers.get_classification_score_nb(clf, feedback)
 	score_qn = classifiers.get_question_score(feedback)
 	score_len = get_length_score(feedback)
 	score_sentiment = sentiment_analysis.get_sentiment_score(feedback)
