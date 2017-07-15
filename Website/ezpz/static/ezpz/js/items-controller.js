@@ -9,7 +9,7 @@
 
 		// on startup, get the topics and get the number of pages
 		vm.activate = function(){
-			// getFeedback();
+			getFeedback();
 			getImageFeedback();
 
 			// getGoodsData();
@@ -39,9 +39,10 @@
 		}
 
 		function getFeedback(){
+			console.log("test");
 			ezpzItemsService.getFeedback(function(response){
 				if(response.success){
-					$scope.imageFeedback = response;
+					$scope.feedback = response.feedback.feedback;
 					$scope.errorMessage = "";
 				} else {
 					$scope.errorMessage += "Unable to retrieve feedback from server.";
@@ -54,7 +55,9 @@
 			ezpzItemsService.getImageFeedback(function(response){
 				if(response.success){
 					$scope.imageFeedback = response.images;
+					console.log($scope.imageFeedback.images);
 					$scope.errorMessage = "";
+					$scope.$apply();
 				} else {
 					$scope.errorMessage += "Unable to retrieve image feedback from server.";
 				}

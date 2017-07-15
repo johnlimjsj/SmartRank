@@ -18,6 +18,9 @@ from nltkApi.models import TrainedModel
 from sklearn.feature_extraction.text import TfidfVectorizer, TfidfTransformer, CountVectorizer
 from django.utils import timezone
 from django.views import View
+from .forms import *
+from base64 import b64decode
+from django.core.files.base import ContentFile
 import pickle
 import numpy as np
 import datetime
@@ -118,13 +121,22 @@ class ImageManager(View):
 		# add a new image into database
 		# data = json.loads(request.body)
 		# imageFeedback = data['imageFeedback']
-		imageFeedback = request.FILES.get('imageFeedback')
-		# category = general_operations.get_image_classification(imageFeedback)
-		category = "None"
-		score_dict = general_operations._get_priority_score_dict(category, datetime.datetime.now())
-		priority = general_operations._get_priority_score(score_dict)
-		image = ImageFeedback(image=imageFeedback, category=category, date_created=timezone.now(), priority=priority)
-		image.save()
-		return JsonResponse({"success": True}, status=200)
-
+		if request.POST.get("image"):
+			image_feedback = request.POST.get("image")
+			# image_feedback = image_feedback.split('base64,', 1 )
+			print image_feedback
+			# image_feedback = b64decode(image_feedback)
+			
+			# print "imageFeedback: " + imageFeedback
+			# category = general_operations.get_image_classification(imageFeedback)
+			category = "None"
+			image_name = category
+			score_dict = general_operations._get_priority_score_dict(category, datetime.datetime.now())
+			priority = general_operations._get_priority_score(score_dict)
+			image = ImageFeedback(image=ContentFile(image_feedback, image_name), category=category, date_created=timezone.now(), priority=priority)
+			image.save()
+			return JsonResponse({"success": True}, status=200)
+		print "error with image form"
+		return HttpResponse(status=404)
+		
 

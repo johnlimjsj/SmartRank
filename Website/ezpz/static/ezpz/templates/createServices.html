@@ -8,25 +8,10 @@
 	<div ng-if="errorMessage" class="alert alert-danger">
 	  <strong>Error:</strong> {{ errorMessage }}
 	</div>
+	<div ng-if="successMessage" class="alert alert-success">
+	  <strong>Success:</strong> {{ successMessage }}
+	</div>
 	<!-- end error message -->
-
-	<!-- create services form -->
-<!-- 	<form id="create-form" name="create-form">
-		<input type="text" ng-model="servicesCategory" class="form-control" name="category" placeholder="Category" />
-		<input type="text" ng-model="servicesName" class="form-control" name="name" placeholder="Name" />
-		<input type="text" ng-model="servicesPrice" class="form-control" name="price" placeholder="Price" />
-		<input type="number" ng-model="servicesLikes" class="form-control" name="likes" placeholder="Likes" min="0" step="1"/>
-		<input type="number" ng-model="servicesRating" class="form-control" name="rating" placeholder="rating" min="0" step="any"/>
-		
-
-		<br/>
-		<button class="btn btn-primary btn-lg" ng-click="createServices()" value="submit">Submit</button>
-	</form> -->
-	<!-- end create services form -->
-
-<!-- 	<audio id="player" controls></audio>
-	<a href="#" id="download">Download</a>
-	<button id="stop">Stop</button> -->
 	<button ng-click="startListening()">Start Recording</button>
 	<button ng-click="stopListening()">Stop Recording</button>
 	{{currentSpeech}}
