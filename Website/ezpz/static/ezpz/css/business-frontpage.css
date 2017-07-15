@@ -12,8 +12,7 @@ body {
 
 .business-header {
     height: 200px;
-    background: red
-    /*background: url('https://media.licdn.com/mpr/mpr/AAEAAQAAAAAAAA2lAAAAJDQ5Y2U3Njg5LWYwOWMtNDIwZC1hOGEwLTI0ZGIxOTgyNWU0Ng.jpg') center center no-repeat scroll;*/
+    background: url('../img/smartrank.png') center center no-repeat scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
