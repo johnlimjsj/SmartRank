@@ -53,6 +53,7 @@ def train_models(request):
 
 	# train_consumer_feedback_model_nb()
 	train_urgency_model_nb()
+	print "trained"
 	return HttpResponse("<h1>Training my model here...</h1>")
 
 class IndexView(TemplateView):
