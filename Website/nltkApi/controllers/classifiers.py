@@ -45,7 +45,7 @@ def get_classification_score_nb(clf, test_data):
 
 def get_question_score(question):
 	info_qn = Question_Sentence_Match(question)
-	sum(info_qn['list_scores'])
+	return sum(info_qn['list_scores'])
 
 
 def Question_Sentence_Match(question, threshold=0.3):

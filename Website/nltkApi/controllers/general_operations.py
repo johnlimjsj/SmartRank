@@ -38,7 +38,7 @@ def get_age_score(date_created):
 	time_diff = date_now - date_created
 	hours, remainder = divmod(time_diff.seconds, 3600)
 	score = math.exp(-(1.0/(hours+0.0001))) # need small offset if not math error
-	return hours, score
+	return score
 
 def _get_priority_score_dict(feedback, date_created):
 	clf = TrainedModel.get_clf("urgency_nb")
@@ -50,8 +50,10 @@ def _get_priority_score_dict(feedback, date_created):
 	return {'urgency': score_urgency, 'question': score_qn, 'length': score_len, 'sentiment': score_sentiment, 'age': score_age}
 
 def _get_priority_score(score_dict):
-	score = score_dict['urgency'] * URGENCY_WEIGHT + score_dict['sentiment'] * SENTIMENT_WEIGHT + \
-			score_dict['length'] * LENGTH_WEIGHT + score_dict['question'] * QUESTION_WEIGHT + score_dict['age'] * AGE_WEIGHT
+	score = score_dict['urgency'] * URGENCY_WEIGHT + score_dict['sentiment'] * SENTIMENT_WEIGHT + score_dict['length'] * LENGTH_WEIGHT + score_dict['question'] * QUESTION_WEIGHT + score_dict['age'] * AGE_WEIGHT
+
+	print score_dict
+	print score
 	return score
 
 def get_image_classification(imageData):

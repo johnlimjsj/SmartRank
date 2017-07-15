@@ -24,11 +24,11 @@ class Services(models.Model):
 class Feedback(models.Model):
 	feedback = models.CharField(max_length=65536)
 	date_created = models.DateTimeField() # should have the time stamp when it is created
-	priority = models.FloatField()
+	priority = models.FloatField(null=True)
 
 	@classmethod
-	def create(cls, feedback, priority):
-		cls.objects.create(feedback=feedback, date_created = datetime.datetime.now(), priority=priority)
+	def create(cls, feedback):
+		cls.objects.create(feedback=feedback, date_created = datetime.datetime.now())
 
 	@classmethod
 	def get_all_sorted_descending(cls):
