@@ -20,6 +20,7 @@
 		};
 
 		$scope.capture = function(){
+			console.log("inside capture");
 			var context = snapshot.getContext('2d');
 			// Draw the video frame to the canvas.
 			context.drawImage(player, 0, 0, snapshotCanvas.width, 

@@ -24,47 +24,44 @@
 <!-- Show feedback that has not been allocated -->
 <h2 class="text-center">Feedback</h2>
 <table class="table table-striped">
-<thead>
-    <tr>
-        <th>Feedback</th>
-        <th>Priority</th>
-        <th>Suggested Allocation</th>
-    </tr>
-</thead>
-<tbody>
-<tr ng-repeat="fb in feedback">
-<td>{{fb.feedback}}</td>
-<td>{{fb.score}}</td>
-
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Feedback</th>
+            <th>Priority</th>
+            <th>Suggested Allocation</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="fb in feedback">
+            <td>{{fb.feedback}}</td>
+            <td>{{fb.score}}</td>
+            <td><span ng-if="allocateManpower">{{fb.person}}</span></td>
+        </tr>
+    </tbody>
 </table>
 <!-- {{feedback}} -->
-<button> Submit allocation</button>
+<button class="btn btn-default" ng-click="allocateManpower()"> Submit allocation</button>
 <hr>
 
 <h2 class="text-center">Image Feedback</h2>
 <table class="table table-striped">
-<thead>
-<tr>
-<th>Image</th>
-<th>Category</th>
-<th>Priority</th>
-</tr>
-</thead>
-<tbody>
-<tr ng-repeat="imgfb in imageFeedback">
-<td><img src="{{imgfb.image}}"></td>
-<td>{{imgfb.category}}</td>
-<td>{{imgfb.priority}}</td>
-</tr>
-</tbody>
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Category</th>
+            <th>Priority</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="imgfb in imageFeedback">
+            <td><img src="{{imgfb.image}}"></td>
+            <td>{{imgfb.category}}</td>
+            <td>{{imgfb.priority}}</td>
+        </tr>
+    </tbody>
 </table>
 
-<div>
-    <a href="https://plot.ly/~nisha004/25/?share_key=dj2qlMQfv6IRNSp9S5GKAG" target="_blank" title="wqejdninoisdna" style="display: block; text-align: center;"><img src="https://plot.ly/~nisha004/25.png?share_key=dj2qlMQfv6IRNSp9S5GKAG" alt="wqejdninoisdna" style="max-width: 100%;width: 600px;"  width="600" onerror="this.onerror=null;this.src='https://plot.ly/404.png';" /></a>
-    <script data-plotly="nisha004:25" sharekey-plotly="dj2qlMQfv6IRNSp9S5GKAG" src="https://plot.ly/embed.js" async></script>
-</div>
+
 
 
 <!-- goods -->

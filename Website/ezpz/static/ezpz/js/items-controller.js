@@ -5,16 +5,20 @@
 		$scope.feedback = {};
 		$scope.imageFeedback = {};
 		$scope.errorMessage = "";
+		$scope.allocateManpower = false;
 		var vm = this;
 
 		// on startup, get the topics and get the number of pages
 		vm.activate = function(){
 			getFeedback();
 			getImageFeedback();
-
-			// getGoodsData();
-			// getServicesData();
 		};
+
+		$scope.allocateManpower = function(){
+			$scope.allocateManpower = !$scope.allocateManpower;
+			console.log($scope.allocateManpower);
+			$scope.$apply();
+		}
 
 		function getGoodsData(){
 			ezpzItemsService.getGoodsData($scope.pageNumber, function(response){

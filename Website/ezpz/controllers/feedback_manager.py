@@ -29,7 +29,7 @@ def get_sorted_feedback(request):
 		]
 		for man in manpower_list:
 			if score >= man['min'] and score < man['max']:
-				return man.name
+				return man['name']
 
 	fb_sorted = Feedback.objects.all()
 	feedback_list = []
