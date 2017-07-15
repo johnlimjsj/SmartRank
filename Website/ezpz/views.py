@@ -51,7 +51,7 @@ def train_models(request):
 		clf = classifiers.train_nb_classifier(dataset)
 		TrainedModel.save_pickle(pickle.dumps(clf), "urgency_nb")
 
-	train_consumer_feedback_model_nb()
+	# train_consumer_feedback_model_nb()
 	train_urgency_model_nb()
 	return HttpResponse("<h1>Training my model here...</h1>")
 
