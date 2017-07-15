@@ -15,6 +15,22 @@ def store_feedback(request):
 
 @require_GET
 def get_sorted_feedback(request):
+
+	def get_manpower(score):
+		manpower_list = [
+			{'name': 'Daniel Seetoh', 'min': 0.6, 'max': 1.0},
+			{'name': 'John Lim', 'min': 0.5, 'max': 0.6},
+			{'name': 'Nisha Srinidhi', 'min': 0.4, 'max': 0.5},
+			{'name': 'Nikhil Srinidhi', 'min': 0.3, 'max': 0.4},
+			{'name': 'Joshua Seetoh', 'min': 0.2, 'max': 0.3},
+			{'name': 'Kwan Yew Lee', 'min': 0.15, 'max': 0.2},
+			{'name': 'Benjamin Lee', 'min': 0.1, 'max': 0.15},
+
+		]
+		for man in manpower_list:
+			if score >= man['min'] and score < man['max']:
+				return man.name
+
 	fb_sorted = Feedback.objects.all()
 	feedback_list = []
 	for fb in fb_sorted:
@@ -24,7 +40,7 @@ def get_sorted_feedback(request):
 		score = general_operations._get_priority_score(score_dict)
 		fb.priority = score
 		fb.save()
-		feedback_list.append({'feedback': feedback, 'score': score})
+		feedback_list.append({'feedback': feedback, 'score': score, 'person': get_manpower(score)})
 
 	sorted_fb_list = sorted(feedback_list, key=itemgetter('score'), reverse=True)
 

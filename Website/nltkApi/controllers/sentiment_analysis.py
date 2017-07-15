@@ -10,7 +10,6 @@ def get_sentiment_score(paragraph):
 	sentences = tokenize.sent_tokenize(paragraph)
 	sid = SentimentIntensityAnalyzer()
 	sensitivity_score = sid.polarity_scores(paragraph)
-	print "paragraph negativity", sensitivity_score['neg']
 
 	if len(sentences) == 0:
 		return 0
