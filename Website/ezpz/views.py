@@ -121,7 +121,8 @@ class ImageManager(View):
 		imageFeedback = request.FILES.get('imageFeedback')
 		# category = general_operations.get_image_classification(imageFeedback)
 		category = "None"
-		priority = general_operations._get_priority_score(category)
+		score_dict = general_operations._get_priority_score_dict(category, datetime.datetime.now())
+		priority = general_operations._get_priority_score(score_dict)
 		image = ImageFeedback(image=imageFeedback, category=category, date_created=timezone.now(), priority=priority)
 		image.save()
 		return JsonResponse({"success": True}, status=200)
