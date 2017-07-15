@@ -36,16 +36,23 @@
 
 		var uploadImage = function(data, callback){
 			var url = "image/";
-			var form = new FormData();
-			form.append("imageFeedback", data);
+			var fd = new FormData();
+			fd.append("image", data);
 
 			// sends the data over to the server to create a new topic
 			$http({
 				method: 'POST',
 				url: url,
+				data: fd,
+			    transformRequest: angular.identity,
+			    headers: {
+			        'Content-Type': undefined
+			    }
 				// headers: ezpzServerService.header,
 			    // transformRequest: ezpzServerService.formURLEncode,
-			    data: form
+			    // data: {
+			    // 	imageFeedback: data
+			    // }
 			})
 			.then(successCallback, errorCallback);
 

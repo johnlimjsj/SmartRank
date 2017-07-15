@@ -62,7 +62,25 @@
 		};
 
 		var getFeedback = function(callback){
-			var url = "get-priority-dict/";
+			var url = "get-sorted-feedback/";
+
+			$http({
+				method: 'GET',
+				url: url
+			})
+			.then(function(response){
+				$log.debug("get Feedback success");
+				callback({
+					success: true,
+					feedback: response.data
+				})
+			}, function(response){
+				$log.debug("get Feedback fail");
+				callback({
+					success: false,
+					feedback: response.data
+				})
+			})
 		};
 
 		var getImageFeedback = function(callback){

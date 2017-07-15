@@ -43,8 +43,8 @@ class ImageFeedback(models.Model):
 
 	def as_dict(self):
 		return {
-			'image': self.image,
+			'image': self.image.url,
 			'category': self.category,
-			'date_created': self.date_created,
+			'date_created': self.date_created.isoformat(),
 			'priority': self.priority
 		}

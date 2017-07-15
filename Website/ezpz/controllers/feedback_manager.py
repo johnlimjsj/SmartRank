@@ -28,6 +28,8 @@ def get_sorted_feedback(request):
 
 	sorted_fb_list = sorted(feedback_list, key=itemgetter('score'), reverse=True)
 
+	print sorted_fb_list
+
 	return JsonResponse({'feedback': sorted_fb_list})
 
 

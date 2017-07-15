@@ -4,29 +4,62 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="tagline">EZPZ - Connecting Needs</h1>
+                <h1 class="tagline">SmartRank - Putting First Things First</h1>
             </div>
         </div>
     </div>
 </header>
 
-<h1 class="text-center">Items</h1>
+<!-- <h1 class="text-center">Items</h1> -->
 
 <!-- error -->
 <div ng-if="errorMessage" class="alert alert-danger">
   <strong>Error:</strong> {{ errorMessage }}
 </div>
+<div ng-if="successMessage" class="alert alert-success">
+    <strong>Success:</strong> {{ successMessage }}
+</div>
 <!-- end error -->
 <hr>
 
 <h2 class="text-center">Feedback</h2>
-{{feedback}}
+<table class="table table-striped">
+<thead>
+<tr>
+<th>Feedback</th>
+<th>Priority</th>
+</tr>
+</thead>
+<tbody>
+<tr ng-repeat="fb in feedback">
+<td>{{fb.feedback}}</td>
+<td>{{fb.score}}</td>
+</tr>
+</tbody>
+</table>
+<!-- {{feedback}} -->
 
 <hr>
 
 <h2 class="text-center">Image Feedback</h2>
 {{imageFeedback}}
-
+{{imageFeedback["images"]}}
+<table class="table table-striped">
+<thead>
+<tr>
+<th>Image</th>
+<th>Category</th>
+<th>Priority</th>
+</tr>
+</thead>
+<tbody>
+<tr ng-repeat="imgfb in imageFeedback">
+<td><img src="{{imgfb.image}}"></td>
+<td>{{imgfb.category}}</td>
+<td>{{imgfb.priority}}</td>
+</tr>
+</tbody>
+</table>
 
 <!-- goods -->
 <!-- <h2 class="text-center">Goods</h2>

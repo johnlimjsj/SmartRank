@@ -34,10 +34,44 @@
 
 		};
 
+		var uploadFeedback = function(data, callback){
+			var url = "store-feedback/";
+
+			// sends the data over to the server to create a new topic
+			$http({
+				method: 'POST',
+				url: url,
+				// headers: ezpzServerService.header,
+			 //    transformRequest: ezpzServerService.formURLEncode,
+			    data: {
+			    	'feedback': data
+			    }
+			})
+			.then(successCallback, errorCallback);
+
+			// on success
+			function successCallback(response){
+				$log.debug("Upload feedback success");
+				callback({
+					success:true
+				});
+			}
+
+			// on error
+			function errorCallback(response){
+				$log.debug("Upload feedback fail");
+				callback({
+					success:false
+				})
+			}
+
+		}
+
 
 	    // exposes these functions as part of this service
 		return {
-			createServices: createServices
+			createServices: createServices,
+			uploadFeedback: uploadFeedback,
 		};
 
 	};
