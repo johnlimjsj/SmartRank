@@ -10,7 +10,7 @@ class TrainedModel(models.Model):
 	pickled_name = models.CharField(max_length=65536)
 
 	def __str__(self):
-		return self.name, self.pickled_name
+		return self.name
 
 	@classmethod
 	def get_pickle(cls, name):

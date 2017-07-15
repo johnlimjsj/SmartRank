@@ -20,6 +20,7 @@ def train_svm_classifier(dataset):
 
 
 def train_nb_classifier(dataset):
+
 	text_clf = Pipeline([('vect', CountVectorizer()), ('tfidf', TfidfTransformer()), ('clf', MultinomialNB()), ])
 	text_clf = text_clf.fit(dataset.data, dataset.target)
 	return text_clf

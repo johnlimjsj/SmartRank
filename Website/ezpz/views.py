@@ -35,12 +35,9 @@ def train_models(request):
 
 	def train_consumer_feedback_model_nb():
 		dataset = DataSet()
-		dataset.format(ConsumerComplaints.all, "Issue", "Product")
-		text_clf = classifiers.train_nb_classifier(dataset)
-		pickle.dumps(text_clf)
-		test_data = ['God is love']
-		predicted = text_clf.predict(test_data)
-		print predicted, np.mean(predicted == dataset.target)
+		dataset.format(ConsumerComplaints.all, "Issue", "Product") #Issue
+		clf = classifiers.train_nb_classifier(dataset)
+		TrainedModel.save_pickle(pickle.dumps(clf), "consumer_feedback_nb")
 
 
 	def train_urgency_model_nb():
@@ -49,28 +46,13 @@ def train_models(request):
 		clf = classifiers.train_nb_classifier(dataset)
 		TrainedModel.save_pickle(pickle.dumps(clf), "urgency_nb")
 
-	# train_consumer_feedback_model_nb()
+	train_consumer_feedback_model_nb()
 	train_urgency_model_nb()
 	return HttpResponse("<h1>Training my model here...</h1>")
 
 class IndexView(TemplateView):
 	template_name = 'ezpz/main.html'
 
-	paragraph = "I NEED loads of help. Please help me" # "It was one of the worst movies I've seen, despite good reviews. Unbelievably bad acting!! Poor direction. It was a VERY poor production. The movie was bad. Very bad movie. VERY BAD movie. VERY BAD movie!"
-	paragraph_medium = "I need some help with activating my account. Several days ago, I tried logging in, but was unsuccessful over 3 attempts and then got locked out. Could I have some assistance with reactivating my account? "# "The damage caused by the Incident only marginally increases over time."
-	paragraph_low = "Thanks for your help on this issue a couple of days back! I would like to commend you and your team on a job well done"
-	question = "why don't you just find it in the target"
-	question2 = "Several days ago, I tried logging in, but was unsuccessful over 3 attempts and then got locked out. Could I have some assistance with reactivating my account?"
-	# classifiers.Question_Sentence_Match(question2)
-
-	dataset = DataSet()
-	dataset.format(FEEDBACK_DATA_PATH, "Message", "Importance");
-
-	clf = TrainedModel.get_clf("urgency_nb")
-	info = classifiers.get_classification_score_nb(clf, paragraph_medium)
-	print info
-
-	#
 	# general_operations.get_age(datetime.datetime(2017, 6, 23, 16, 29, 43))
 
 	@method_decorator(ensure_csrf_cookie)
