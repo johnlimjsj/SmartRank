@@ -12,8 +12,14 @@
 	  <strong>Success:</strong> {{ successMessage }}
 	</div>
 	<!-- end error message -->
-	<button ng-click="startListening()">Start Recording</button>
-	<button ng-click="stopListening()">Stop Recording</button>
+	<button class="btn btn-lg btn-default" ng-click="startListening()">Start Recording</button>
+	<button class="btn btn-lg btn-default" ng-click="stopListening()">Stop Recording</button>
+	<br><br>
+	<div class="panel panel-default" ng-if="currentSpeech">
+	<div class="panel-body">
 	{{currentSpeech}}
+	</div>
+	</div>
+	<button class="btn btn-lg btn-primary" ng-click="submit()" ng-if="currentSpeech">Submit</button>
 
 </div>

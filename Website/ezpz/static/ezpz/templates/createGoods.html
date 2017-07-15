@@ -13,13 +13,55 @@
 	</div>
 	<!-- end error message -->
 </div>
+
 <div style="display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     width: 100%;">
+    <button id="capture" type="button" class="btn btn-primary btn-lg text-center" data-toggle="modal" data-target="#myModal" ng-click="capture()">Capture Image</button>
+</div>
+<br><br>
+<div style="display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;">
+
 <video id="player" controls autoplay></video>
-<button id="capture" ng-click="capture()">Capture</button>
-<canvas id="snapshot" width=320 height=240></canvas>
+<!-- <button id="capture" ng-click="capture()">Capture</button> -->
+<!-- <canvas id="snapshot" width=320 height=240></canvas> -->
+</div>
+<hr>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Snapshot</h4>
+      </div>
+      <div class="modal-body">
+      <div style="display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;">
+        <canvas id="snapshot" width=320 height=240></canvas>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="submit()">Submit</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 </div>

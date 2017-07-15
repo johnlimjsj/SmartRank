@@ -17,14 +17,7 @@
 		recognition.onresult = function(event) {
 			$scope.currentSpeech = event.results[0][0].transcript;
 			$scope.$apply();
-			ezpzCreateServicesService.uploadFeedback($scope.currentSpeech, function(response){
-				if(response.success){
-					$scope.errorMessage = "";
-					$scope.successMessage = "Uploaded feedback successfully!";
-				} else {
-					$scope.errorMessage = "Unable to upload feedback";
-				}
-			})
+			
 		};
 
 		vm.activate = function(){
@@ -36,6 +29,17 @@
 
 		$scope.stopListening = function(){
 			recognition.stop();
+		}
+
+		$scope.submit = function(){
+			ezpzCreateServicesService.uploadFeedback($scope.currentSpeech, function(response){
+				if(response.success){
+					$scope.errorMessage = "";
+					$scope.successMessage = "Uploaded feedback successfully!";
+				} else {
+					$scope.errorMessage = "Unable to upload feedback";
+				}
+			})
 		}
 
 		// create a topic
