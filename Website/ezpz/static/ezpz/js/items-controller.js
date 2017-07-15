@@ -39,7 +39,6 @@
 		}
 
 		function getFeedback(){
-			console.log("test");
 			ezpzItemsService.getFeedback(function(response){
 				if(response.success){
 					$scope.feedback = response.feedback.feedback;
@@ -54,8 +53,8 @@
 		function getImageFeedback(){
 			ezpzItemsService.getImageFeedback(function(response){
 				if(response.success){
-					$scope.imageFeedback = response.images;
-					console.log($scope.imageFeedback.images);
+					$scope.imageFeedback = response.images.images;
+					console.log("string" + $scope.imageFeedback);
 					$scope.errorMessage = "";
 					$scope.$apply();
 				} else {

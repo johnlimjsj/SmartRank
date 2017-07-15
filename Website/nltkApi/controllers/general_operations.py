@@ -79,8 +79,11 @@ def get_image_classification(imageData):
 	# patient; the weights will be cached and subsequent runs of this
 	# script will be *much* faster)
 	print("[INFO] loading {}...".format("vgg16"))
+	
 	Network = MODELS["vgg16"]
 	model = Network(weights="imagenet")
+
+	print "image data is", imageData
 
 	# load the input image using the Keras helper utility while ensuring
 	# the image is resized to `inputShape`, the required input dimensions

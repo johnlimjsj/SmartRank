@@ -19,12 +19,14 @@ from sklearn.feature_extraction.text import TfidfVectorizer, TfidfTransformer, C
 from django.utils import timezone
 from django.views import View
 from .forms import *
+import base64
 from base64 import b64decode
 from django.core.files.base import ContentFile
 import pickle
 import numpy as np
 import datetime
 import json
+import collections
 
 from django.utils import timezone
 
@@ -115,7 +117,10 @@ class ImageManager(View):
 		# return all images sorted by priority
 		all_images = ImageFeedback.objects.all().order_by('-priority')
 		dictionaries = [ obj.as_dict() for obj in all_images ]
-		return JsonResponse(json.dumps({"images":dictionaries}), safe=False)
+		# print dictionaries
+		dictionaries = convertToString(dictionaries)
+		print dictionaries
+		return JsonResponse({"images": dictionaries}, safe=False)
 
 	def post(self, request):
 		# add a new image into database
@@ -124,19 +129,34 @@ class ImageManager(View):
 		if request.POST.get("image"):
 			image_feedback = request.POST.get("image")
 			# image_feedback = image_feedback.split('base64,', 1 )
-			print image_feedback
+			# print image_feedback
 			# image_feedback = b64decode(image_feedback)
-			
+			format, imgstr = image_feedback.split(';base64,') 
+			ext = format.split('/')[-1] 
+			data = ContentFile(base64.b64decode(imgstr), name='temp.' + ext)
 			# print "imageFeedback: " + imageFeedback
-			# category = general_operations.get_image_classification(imageFeedback)
-			category = "None"
+			category = general_operations.get_image_classification(data)
+			# category = "None"
 			image_name = category
 			score_dict = general_operations._get_priority_score_dict(category, datetime.datetime.now())
 			priority = general_operations._get_priority_score(score_dict)
-			image = ImageFeedback(image=ContentFile(image_feedback, image_name), category=category, date_created=timezone.now(), priority=priority)
+			image = ImageFeedback(image=data, category=category, date_created=timezone.now(), priority=priority)
 			image.save()
 			return JsonResponse({"success": True}, status=200)
 		print "error with image form"
 		return HttpResponse(status=404)
-		
 
+def get_image(request, year, month, day, image_name):
+	src = "images/" + year + "/" + month + "/" + day + "/" + image_name
+	image_data = open(src, "rb").read()
+	return HttpResponse(image_data, content_type="image/png")
+		
+def convertToString(data):
+    if isinstance(data, basestring):
+        return str(data)
+    elif isinstance(data, collections.Mapping):
+        return dict(map(convertToString, data.iteritems()))
+    elif isinstance(data, collections.Iterable):
+        return type(data)(map(convertToString, data))
+    else:
+        return data

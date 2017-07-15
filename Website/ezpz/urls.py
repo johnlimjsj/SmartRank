@@ -19,5 +19,6 @@ urlpatterns = [
 	url(r'^image/$', views.ImageManager.as_view(), name='image'),
 	url(r'^store-feedback/$', feedback_manager.store_feedback),
 	url(r'^get-sorted-feedback/$', feedback_manager.get_sorted_feedback),
+	url(r'^images/([0-9]+)/([0-9]+)/([0-9]+)/(.*)', views.get_image),
 	url(r'^.*$', views.IndexView.as_view(), name='index'),
 ]
