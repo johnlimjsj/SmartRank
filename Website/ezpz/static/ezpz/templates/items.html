@@ -21,24 +21,26 @@
 </div>
 <!-- end error -->
 <hr>
-
+<!-- Show feedback that has not been allocated -->
 <h2 class="text-center">Feedback</h2>
 <table class="table table-striped">
 <thead>
-<tr>
-<th>Feedback</th>
-<th>Priority</th>
-</tr>
+    <tr>
+        <th>Feedback</th>
+        <th>Priority</th>
+        <th>Suggested Allocation</th>
+    </tr>
 </thead>
 <tbody>
 <tr ng-repeat="fb in feedback">
 <td>{{fb.feedback}}</td>
 <td>{{fb.score}}</td>
+
 </tr>
 </tbody>
 </table>
 <!-- {{feedback}} -->
-
+<button> Submit allocation</button>
 <hr>
 
 <h2 class="text-center">Image Feedback</h2>
