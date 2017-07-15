@@ -24,7 +24,10 @@
 			// Draw the video frame to the canvas.
 			context.drawImage(player, 0, 0, snapshotCanvas.width, 
 				snapshotCanvas.height);
+		}
 
+		$scope.submit = function(){
+			console.log("inside submit");
 			var dataURL = snapshotCanvas.toDataURL();
 			ezpzCreateGoodsService.uploadImage(dataURL, function(response){
 				if (response.success){
@@ -35,7 +38,7 @@
 				}
 			})
 		}
-
+		
 		navigator.mediaDevices.getUserMedia({video: true})
 			.then(handleSuccess);
 

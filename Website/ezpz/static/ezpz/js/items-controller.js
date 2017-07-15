@@ -54,7 +54,7 @@
 			ezpzItemsService.getImageFeedback(function(response){
 				if(response.success){
 					$scope.imageFeedback = response.images.images;
-					console.log("string" + $scope.imageFeedback);
+					// console.log("string" + $scope.imageFeedback);
 					$scope.errorMessage = "";
 					$scope.$apply();
 				} else {

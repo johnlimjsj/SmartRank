@@ -107,9 +107,13 @@ def get_image_classification(imageData):
 	preds = model.predict(image)
 	P = imagenet_utils.decode_predictions(preds)
 
+	most_likely_label = ""
+
 	# loop over the predictions and display the rank-5 predictions +
 	# probabilities to our terminal
 	for (i, (imagenetID, label, prob)) in enumerate(P[0]):
+		if(i==0):
+			most_likely_label = label
 		print("{}. {}: {:.2f}%".format(i + 1, label, prob * 100))
 
 	# load the image via OpenCV, draw the top prediction on the image,
@@ -121,7 +125,7 @@ def get_image_classification(imageData):
 	# cv2.imshow("Classification", orig)
 	# cv2.waitKey(0)
 
-	return label
+	return most_likely_label
 
 
 
