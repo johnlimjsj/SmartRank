@@ -5,16 +5,19 @@
 		$scope.feedback = {};
 		$scope.imageFeedback = {};
 		$scope.errorMessage = "";
+		$scope.showManpower = false;
 		var vm = this;
 
 		// on startup, get the topics and get the number of pages
 		vm.activate = function(){
 			getFeedback();
 			getImageFeedback();
-
-			// getGoodsData();
-			// getServicesData();
 		};
+
+		$scope.allocateManpower = function(){
+			$scope.showManpower = !$scope.showManpower;
+			console.log($scope.showManpower);
+		}
 
 		function getGoodsData(){
 			ezpzItemsService.getGoodsData($scope.pageNumber, function(response){
@@ -56,7 +59,7 @@
 					$scope.imageFeedback = response.images.images;
 					// console.log("string" + $scope.imageFeedback);
 					$scope.errorMessage = "";
-					$scope.$apply();
+					// $scope.$apply();
 				} else {
 					$scope.errorMessage += "Unable to retrieve image feedback from server.";
 				}

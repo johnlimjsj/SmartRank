@@ -32,6 +32,10 @@
 			templateUrl: "static/ezpz/templates/createServices.html",
 			controller: "ezpzCreateServicesController"
 		})
+		.when("/analytics", {
+			templateUrl: "static/ezpz/templates/analytics.html",
+			controller: "ezpzAnalyticsController"
+		})
 		.otherwise({
 			templateUrl: "static/ezpz/templates/items.html",
 			controller: "ezpzItemsController"
