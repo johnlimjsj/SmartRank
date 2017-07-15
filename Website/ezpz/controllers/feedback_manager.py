@@ -18,7 +18,8 @@ def get_sorted_feedback(request):
 
 	def get_manpower(score):
 		manpower_list = [
-			{'name': 'Lee Hsien Loong', 'min': 0.75, 'max': 0.8},
+			{'name': 'Lee Hsien Loong', 'min': 0.8, 'max': 1.0},
+			{'name': 'Trump', 'min': 0.75, 'max': 0.8},
 			{'name': 'Teo Chee Hean', 'min': 0.7, 'max': 0.75},
 			{'name': 'Goh Chok Tong', 'min': 0.65, 'max': 0.7},
 			{'name': 'Daniel Seetoh', 'min': 0.6, 'max': 0.65},

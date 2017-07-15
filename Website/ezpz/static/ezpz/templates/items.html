@@ -35,12 +35,12 @@
         <tr ng-repeat="fb in feedback">
             <td>{{fb.feedback}}</td>
             <td>{{fb.score}}</td>
-            <td><span ng-if="allocateManpower">{{fb.person}}</span></td>
+            <td><span ng-if="showManpower">{{fb.person}}</span></td>
         </tr>
     </tbody>
 </table>
 <!-- {{feedback}} -->
-<button class="btn btn-default" ng-click="allocateManpower()"> Submit allocation</button>
+<button class="btn btn-default" ng-click="allocateManpower()">Allocate Manpower</button>
 <hr>
 
 <h2 class="text-center">Image Feedback</h2>

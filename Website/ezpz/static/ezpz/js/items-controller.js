@@ -5,7 +5,7 @@
 		$scope.feedback = {};
 		$scope.imageFeedback = {};
 		$scope.errorMessage = "";
-		$scope.allocateManpower = false;
+		$scope.showManpower = false;
 		var vm = this;
 
 		// on startup, get the topics and get the number of pages
@@ -15,9 +15,8 @@
 		};
 
 		$scope.allocateManpower = function(){
-			$scope.allocateManpower = !$scope.allocateManpower;
-			console.log($scope.allocateManpower);
-			$scope.$apply();
+			$scope.showManpower = !$scope.showManpower;
+			console.log($scope.showManpower);
 		}
 
 		function getGoodsData(){
@@ -60,7 +59,7 @@
 					$scope.imageFeedback = response.images.images;
 					// console.log("string" + $scope.imageFeedback);
 					$scope.errorMessage = "";
-					$scope.$apply();
+					// $scope.$apply();
 				} else {
 					$scope.errorMessage += "Unable to retrieve image feedback from server.";
 				}
