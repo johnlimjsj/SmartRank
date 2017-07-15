@@ -11,7 +11,8 @@ body {
 /* Header Image Background - Change the URL below to your image path (example: ../images/background.jpg) */
 
 .business-header {
-    height: 400px;
+    height: 200px;
+    background: red
     /*background: url('https://media.licdn.com/mpr/mpr/AAEAAQAAAAAAAA2lAAAAJDQ5Y2U3Njg5LWYwOWMtNDIwZC1hOGEwLTI0ZGIxOTgyNWU0Ng.jpg') center center no-repeat scroll;*/
     -webkit-background-size: cover;
     -moz-background-size: cover;
