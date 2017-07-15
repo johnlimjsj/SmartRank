@@ -6,6 +6,7 @@
 		$scope.imageFeedback = {};
 		$scope.errorMessage = "";
 		$scope.showManpower = false;
+		$scope.lowPriorityFeedback = {};
 		var vm = this;
 
 		// on startup, get the topics and get the number of pages
@@ -17,6 +18,13 @@
 		$scope.allocateManpower = function(){
 			$scope.showManpower = !$scope.showManpower;
 			console.log($scope.showManpower);
+		}
+
+		$scope.respondToLowPriority = function(){
+			// for(var feedback in $scope.feedback){
+			// 	if (feedback.score<)
+			// }
+			console.log($scope.feedback);
 		}
 
 		function getGoodsData(){
