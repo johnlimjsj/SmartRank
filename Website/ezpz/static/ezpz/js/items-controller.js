@@ -5,6 +5,7 @@
 		$scope.feedback = {};
 		$scope.imageFeedback = {};
 		$scope.errorMessage = "";
+		$scope.successMessage = "";
 		$scope.showManpower = false;
 		$scope.lowPriorityFeedback = [];
 		var lowPriorityThreshold = 0.3;
@@ -37,6 +38,7 @@
 
 		$scope.submitLowPriorityResponse = function(){
 			$scope.lowPriorityFeedback = [];
+			$scope.successMessage = "Sent responses to low priority emails";
 		}
 
 		function getGoodsData(){

@@ -11,7 +11,8 @@ body {
 /* Header Image Background - Change the URL below to your image path (example: ../images/background.jpg) */
 
 .business-header {
-    height: 200px;
+    height: 280px;
+    width: 100%;
     background: url('../img/smartrank.png') center center no-repeat scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;

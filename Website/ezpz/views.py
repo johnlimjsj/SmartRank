@@ -27,6 +27,8 @@ import numpy as np
 import datetime
 import json
 import collections
+import requests
+import cloudsight
 
 from django.utils import timezone
 
@@ -108,25 +110,39 @@ class ImageManager(View):
 
 	def post(self, request):
 		# add a new image into database
-		# data = json.loads(request.body)
-		# imageFeedback = data['imageFeedback']
 		if request.POST.get("image"):
 			image_feedback = request.POST.get("image")
-			# image_feedback = image_feedback.split('base64,', 1 )
-			# print image_feedback
-			# image_feedback = b64decode(image_feedback)
 			format, imgstr = image_feedback.split(';base64,') 
 			ext = format.split('/')[-1] 
 			data = ContentFile(base64.b64decode(imgstr), name='temp.' + ext)
-			# print "imageFeedback: " + imageFeedback
-			category = general_operations.get_image_classification(data)
-			# category = "None"
-			image_name = category
-			score_dict = general_operations._get_priority_score_dict(category, datetime.datetime.now())
-			priority = general_operations._get_priority_score(score_dict)
-			image = ImageFeedback(image=data, category=category, date_created=timezone.now(), priority=priority)
-			image.save()
-			return JsonResponse({"success": True}, status=200)
+			auth = cloudsight.SimpleAuth('1bRy8uWYdSP9iErp-lImYg')
+			api = cloudsight.API(auth)
+			response = api.image_request(data, 'temp.' + ext, {
+		        'image_request[locale]': 'en-US',
+		    })
+			print "wait"
+			status = api.wait(response['token'], timeout=30)
+			print "get image response"
+			status = api.image_response(response['token'])
+			if status['status'] != cloudsight.STATUS_NOT_COMPLETED:
+				# Done!
+				print "inside completed"
+				print status
+				category = status['name']
+				score_dict = general_operations._get_priority_score_dict(category, datetime.datetime.now())
+				priority = general_operations._get_priority_score(score_dict)
+				image = ImageFeedback(image=data, category=category, date_created=timezone.now(), priority=priority)
+				image.save()
+				# category = general_operations.get_image_classification(data)
+				# image_name = category
+				# score_dict = general_operations._get_priority_score_dict(category, datetime.datetime.now())
+				# priority = general_operations._get_priority_score(score_dict)
+				# image = ImageFeedback(image=data, category=category, date_created=timezone.now(), priority=priority)
+				# image.save()
+				return JsonResponse({"success": True}, status=200)
+			print "end"	
+			print "error with api"
+			return HttpResponse(status=404)
 		print "error with image form"
 		return HttpResponse(status=404)
 
