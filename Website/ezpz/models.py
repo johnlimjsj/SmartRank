@@ -28,7 +28,7 @@ class Feedback(models.Model):
 
 	@classmethod
 	def create(cls, feedback):
-		cls.objects.create(feedback=feedback, date_created = datetime.datetime.now())
+		cls.objects.create(feedback=feedback, date_created = timezone.now())
 
 	@classmethod
 	def get_all_sorted_descending(cls):
