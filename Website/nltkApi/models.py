@@ -7,7 +7,7 @@ import pickle
 
 class TrainedModel(models.Model):
 	name = models.CharField(max_length=255)
-	pickled_name = models.CharField(max_length=65536)
+	pickled_name = models.CharField(max_length=6553600)
 
 	def __str__(self):
 		return self.name

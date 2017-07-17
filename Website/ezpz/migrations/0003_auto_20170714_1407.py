@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('feedback', models.CharField(max_length=65536)),
-                ('date_created', models.TimeField()),
+                ('date_created', models.DateTimeField()),
                 ('priority', models.FloatField()),
             ],
         ),

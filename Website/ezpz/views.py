@@ -48,12 +48,18 @@ def train_models(request):
 
 
 	def train_urgency_model_nb():
+		print "inside train urgency model"
 		dataset = DataSet()
+		print "after dataset"
 		dataset.format(FEEDBACK_DATA_PATH, "Message", "Importance");
+		print "after format"
 		clf = classifiers.train_nb_classifier(dataset)
+		print "after clf"
 		TrainedModel.save_pickle(pickle.dumps(clf), "urgency_nb")
+		print "after save_pickle"
 
 	# train_consumer_feedback_model_nb()
+	print "before train urgency"
 	train_urgency_model_nb()
 	print "trained"
 	return HttpResponse("<h1>Training my model here...</h1>")
