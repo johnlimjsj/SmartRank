@@ -8,6 +8,7 @@
 		$scope.servicesLikes = "";
 		$scope.servicesRating = "";
 		$scope.currentSpeech = "";
+		$scope.recording = false;
 		var TOPIC_LENGTH_LIMIT = 255;
 		var vm = this;
 		var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
@@ -15,20 +16,24 @@
 		recognition.interimResults = false;
 		recognition.maxAlternatives = 5;
 		recognition.onresult = function(event) {
+			$scope.recording = false;
 			$scope.currentSpeech = event.results[0][0].transcript;
 			$scope.$apply();
-			
 		};
 
 		vm.activate = function(){
 		}
 
 		$scope.startListening = function(){
+			$scope.recording = true;
 			recognition.start();
+			
 		}
 
 		$scope.stopListening = function(){
+			$scope.recording = false;
 			recognition.stop();
+			
 		}
 
 		$scope.submit = function(){

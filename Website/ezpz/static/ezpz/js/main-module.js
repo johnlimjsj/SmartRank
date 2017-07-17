@@ -24,11 +24,11 @@
 			templateUrl: "static/ezpz/templates/items.html",
 			controller: "ezpzItemsController"
 		})
-		.when("/createGoods", {
+		.when("/image", {
 			templateUrl: "static/ezpz/templates/createGoods.html",
 			controller: "ezpzCreateGoodsController"
 		})
-		.when("/createServices", {
+		.when("/audio", {
 			templateUrl: "static/ezpz/templates/createServices.html",
 			controller: "ezpzCreateServicesController"
 		})

@@ -27,7 +27,7 @@ def get_sorted_feedback(request):
 			{'name': 'Nisha Srinidhi', 'min': 0.4, 'max': 0.5},
 			{'name': 'Nikhil Srinidhi', 'min': 0.3, 'max': 0.4},
 			{'name': 'Joshua Seetoh', 'min': 0.2, 'max': 0.3},
-			{'name': 'Kwan Yew Lee', 'min': 0.15, 'max': 0.2},
+			{'name': 'Jess Lee', 'min': 0.15, 'max': 0.2},
 			{'name': 'Benjamin Lee', 'min': 0.1, 'max': 0.15},
 		]
 

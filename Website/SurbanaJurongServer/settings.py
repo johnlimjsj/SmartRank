@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -116,16 +116,16 @@ if ((os.environ.get('DATABASE_URL')!='localhost') and os.environ.get('DATABASE_U
     host = database_credentials[third_delimiter+1:fourth_delimiter]
     port = database_credentials[fourth_delimiter+1:fifth_delimiter]
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'), #os.environ.get('DATABASE_NAME'),
-        # 'USER': os.environ.get('DATABASE_USER'),
-        # 'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
-        # 'HOST': os.environ.get('DATABASE_HOST'),
-        # 'PORT': os.environ.get('DATABASE_PORT'),
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': name,
+            'USER': user,
+            'PASSWORD': password,
+            'HOST': host,
+            'PORT': port,
+        }
     }
-}
 
 
 
